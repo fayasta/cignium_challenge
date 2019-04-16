@@ -17,14 +17,38 @@ public class BasePageObject<T>{
 		wait = new WebDriverWait(driver, 30);
 	}
 	
+	/**
+	 * This method clicks on a webElement identified by a locator.
+	 * @param elementBy
+	 */
 	protected void clickOnElement(By elementBy){
 		find(elementBy).click();
 	}
 	
+	/**
+	 * This method finds a webElement identified by a locator.
+	 * @param elementBy
+	 */
 	protected WebElement find(By elementBy){
 		return driver.findElement(elementBy);
 	}
 	
+	/**
+	 * This method fills a webElement with the input given
+	 * @param elementBy By locator
+	 * @param input
+	 */
+	protected void fillField(By elementBy, String input){
+		WebElement webElement = find(elementBy);
+		webElement.clear();
+		webElement.sendKeys(input);
+	}
+	
+	/**
+	 * This method waits until a webElement is visible
+	 * @param locator By locator
+	 * @param timeout time given to wait
+	 */
 	protected void waitForVisibilityOf(By locator, Integer timeout){
 		int attempts = 0;
 		while(attempts < 2){
@@ -42,11 +66,5 @@ public class BasePageObject<T>{
 		timeOutInSeconds = timeOutInSeconds != null ? timeOutInSeconds:30;
 		WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
 		wait.until(condition);
-	}
-	
-	protected void fillField(By elementBy, String input){
-		WebElement webElement = find(elementBy);
-		webElement.clear();
-		webElement.sendKeys(input);
 	}
 }

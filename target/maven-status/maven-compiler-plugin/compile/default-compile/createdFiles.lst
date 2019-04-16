@@ -1,0 +1,8 @@
+base\BaseTest.class
+base\BasePageObject.class
+Utilities\Utility.class
+pages\HomePage.class
+pages\SignInPage.class
+pages\Navigation.class
+pages\RegisterPage.class
+pages\MyAccountPage.class

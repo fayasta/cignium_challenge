@@ -10,37 +10,51 @@ public class Navigation extends BasePageObject<Navigation> {
 	private By signInButton = By.xpath("//*[@id=\"header\"]/div[2]/div/div/nav/div[1]/a");
 	private By signOutButton = By.className("logout");
 	private By userNameProfile = By.className("account");
-//	private By userNameProfile = By.cssSelector("a[class='account']");
 	
 	public Navigation(WebDriver driver){
 		super(driver);
 	}
 	
+	/**
+	 * This method has the purpose of waiting until the elements required are visible in order to use this page
+	 */
 	public void isPageOpen(){
 		waitForVisibilityOf(signInButton, 10);
 	}
 	
+	/**
+	 * This method clicks on Sign in button and redirects the user to Sign In Page
+	 * @return
+	 */
 	public SignInPage goToSignInPage(){
 		clickOnElement(signInButton);
 		return new SignInPage(driver);
 	}
 	
+	/**
+	 * Verifies if the Sign out option is visible in the page.
+	 * @return
+	 */
 	public boolean isSignOutButtonVisible(){
-		System.out.println("SIGN OUT"+find(signOutButton).getText());
 		return find(signOutButton).isDisplayed();
 	}
 	
+	/**
+	 * Verifies if the element that contains the the full name is displayed at the top of the page.
+	 * @return
+	 */
 	public boolean isUserProfileNameVisible(){
-		System.out.println("USER NAME"+find(userNameProfile).getText());
 		return find(userNameProfile).isDisplayed();
 	}
 	
+	/**
+	 * After registering a user, this method validates if the full name is displayed in the top of the page.
+	 * @param userName user name
+	 * @param userLastName user last name
+	 * @return boolean
+	 */
 	public boolean validateUserAuthenticated(String userName, String userLastName){
-		System.out.println("USER NAME:::::"+userName);
-		System.out.println("USER LAST NAME:::::"+userLastName);
-		
 		String userFullName = userName + " " + userLastName;
-		System.out.println("USER FULL NAME:::::"+userFullName);
 		return userFullName.equals(find(userNameProfile).getText());
 	}
 }

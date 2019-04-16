@@ -13,12 +13,18 @@ public class MyAccountPage extends BasePageObject<MyAccountPage> {
 		super(driver);
 	}
 	
+	/**
+	 * This method has the purpose of waiting until the elements required are visible in order to use this page
+	 */
 	public void isPageOpen(){
 		waitForVisibilityOf(accountContainer, 10);
 	}
 	
+	/**
+	 * This method validates if the URL of this page is the one expected.
+	 * @return a boolean
+	 */
 	public boolean validateURL(){
-		System.out.println("URL"+driver.getCurrentUrl());
 		return driver.getCurrentUrl().contains("?controller=my-account");
 	}
 }

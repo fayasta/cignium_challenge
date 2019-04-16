@@ -2,7 +2,7 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-
+import Utilities.DataGenerator;
 import Utilities.Utility;
 import base.BasePageObject;
 
@@ -10,6 +10,7 @@ public class RegisterPage extends BasePageObject<RegisterPage> {
 	
 	//PERSONAL INFORMATION SECTION
 	private By mrOption = By.id("id_gender1");
+	private By mrsOption = By.id("id_gender2");
 	private By customerFirstNameField = By.id("customer_firstname");
 	private By customerLastNameField = By.id("customer_lastname");
 	private By userPasswordField = By.id("passwd");
@@ -37,35 +38,56 @@ public class RegisterPage extends BasePageObject<RegisterPage> {
 		super(driver);
 	}
 
+	/**
+	 * This method has the purpose of waiting until the elements required are visible in order to use this page
+	 */
 	public void isPageOpen(){
 		waitForVisibilityOf(customerFirstNameField, 10);
 		waitForVisibilityOf(companyField, 10);
 	}
 	
-	public void completePersonalInformationForm(String userFirstName, String userLastName){
-		clickOnElement(mrOption);
-		fillField(customerFirstNameField,userFirstName);
-		fillField(customerLastNameField,userLastName);
-		fillField(userPasswordField,Utility.generatePassword());
-		Utility.selectOneOptionFromDropbox(find(daysContainer));
-		Utility.selectOneOptionFromDropbox(find(monthsContainer));
-		Utility.selectOneOptionFromDropbox(find(yearsContainer));
+	/**
+	 * Method which selects either Mr or Mrs. If the random returns 1, selects Mr; otherwise, selects Mrs.
+	 */
+	private void clickOnGenerOption(){
+		int option = Utility.getRandomBetween(1, 2);
+		if (option==1){
+			 clickOnElement(mrOption);
+		}else{
+			 clickOnElement(mrsOption);
+		}
 	}
 	
+	/**
+	 * This method completes the Personal Information section.
+	 * @param userFirstName
+	 * @param userLastName
+	 */
+	public void completePersonalInformationForm(String userFirstName, String userLastName){
+		clickOnGenerOption();
+		fillField(customerFirstNameField,userFirstName);
+		fillField(customerLastNameField,userLastName);
+		fillField(userPasswordField, DataGenerator.generatePassword());
+		Utility.selectOneOptionRandomlyFromDropbox(find(daysContainer));
+		Utility.selectOneOptionRandomlyFromDropbox(find(monthsContainer));
+		Utility.selectOneOptionRandomlyFromDropbox(find(yearsContainer));
+	}
+	
+	/**
+	 * This method completes the User Address section.
+	 */
 	public void completeUserAddress(){
-		fillField(companyField,Utility.generateCompanyName());
-		fillField(firstAddressField,Utility.generateUserAddress());
-		fillField(secondAddressField,Utility.generateUserAddress());
+		fillField(companyField, DataGenerator.generateCompanyName());
+		fillField(firstAddressField, DataGenerator.generateUserAddress());
+		fillField(secondAddressField, DataGenerator.generateUserAddress());
 		fillField(cityField,"Lima");
-		//FALTA SELECCIONAR UN ESTADO
-		Utility.selectOneOptionFromDropbox(find(stateContainer));
-		fillField(postCodeField,Utility.generatePostCode());
-		//FALTA SELECCIONAR UN COUNTRY
-		Utility.selectOneOptionFromDropbox(find(countryContainer));
-		fillField(additionalInformationField,Utility.generateRandomInformation());
-		fillField(homePhoneField,Utility.generateHomePhone());
-		fillField(mobilePhoneField,Utility.generateMobilePhone());
-		fillField(alliasAddressField,Utility.generateUserAddress());	
+		Utility.selectOneOptionRandomlyFromDropbox(find(stateContainer));
+		fillField(postCodeField, DataGenerator.generatePostCode());
+		Utility.selectOneOptionRandomlyFromDropbox(find(countryContainer));
+		fillField(additionalInformationField, DataGenerator.generateRandomInformation());
+		fillField(homePhoneField, DataGenerator.generateHomePhone());
+		fillField(mobilePhoneField, DataGenerator.generateMobilePhone());
+		fillField(alliasAddressField, DataGenerator.generateUserAddress());	
 	}
 	
 	public MyAccountPage registerNewUser(){
