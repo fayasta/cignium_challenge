@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+  
+<suite name="FirstTestSuite" verbose="1" >
+   <test name="SecondTestSuite" >
+    <classes>
+       <class name="javaFramework.CreateNewUserTest" />
+    </classes>
+  </test>
+</suite>
