@@ -37,6 +37,6 @@ II) Install MAVEN
  ===============
  
  1. Open a terminal
- 2. Go to the project folder ```.../cignium_challenge```
+ 2. Go to the project folder ```cd .../cignium_challenge```
  3. Run the command line ```mvn clean test```
  
