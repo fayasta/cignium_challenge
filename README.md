@@ -31,7 +31,7 @@ II) Install MAVEN
     
  III) Install Git
    1. Install gitbhub from https://git-scm.com/download/win
-   2. Clone the repository: git clone https://github.com/fayasta/rest_api.git
+   2. Clone the repository: git clone https://github.com/fayasta/cignium_challenge_web.git
  
  RUN THE PROJECT
  ===============
